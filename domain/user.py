@@ -1,19 +1,16 @@
-# class User(object):
-#     def __init__(self, name, fullname, password):
-#         self.name = name
-#         self.fullname = fullname
-#         self.password = password
-#
-#     def __repr__(self):
-#         return "<User('%s','%s', '%s')>" % (self.name, self.fullname, self.password)
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+from mvc.model.domain.student import Student
+
+if os.path.exists("cy_db.sqlite"):
+    os.remove("cy_db.sqlite")
+engine = create_engine('sqlite:///cy_db.sqlite', echo=True)
+# engine = create_engine('sqlite:///:memory:', echo=True)
 
 Base = declarative_base()
-
 
 class User(Base):
     __tablename__ = 'users'
@@ -33,12 +30,13 @@ class User(Base):
 
 Base.metadata.create_all(engine)
 
-user = User("John", "John first", "qweasdzxc")
+user = User("John", "John first", "123456-")
 
-# Session = sessionmaker(bind=engine)
-session = sessionmaker(bind=engine)()
+Session = sessionmaker(bind=engine)
+session = Session()
 
 session.add(user)
+
 session.commit()
 
 print(user)
@@ -46,4 +44,4 @@ print(user)
 ourUser = session.query(User).filter_by(name="John").all()
 print ourUser
 
-
+engine.execute("""insert into users(name) values ('Andrii')""")
