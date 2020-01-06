@@ -1,2 +1,5 @@
 venv/
 .idea/
+
+# Compiled source #
+*.pyc
