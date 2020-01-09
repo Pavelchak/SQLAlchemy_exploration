@@ -13,8 +13,11 @@ class StudentService(IStudentService):
     def create(self, obj):
         StudentDAO().create(obj)
 
-    def update(self, obj):
-        StudentDAO().update(obj)
+    def update(self, key, obj):
+        StudentDAO().update(key, obj)
+
+    def patch(self, key, field_name, value):
+        StudentDAO().patch(key, field_name, value)
 
     def delete(self, key):
         StudentDAO().delete(key)

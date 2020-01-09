@@ -13,8 +13,11 @@ class GroupController(IGroupController):
     def create(self, obj):
         GroupService().create(obj)
 
-    def update(self, obj):
-        GroupService().update(obj)
+    def update(self, key, obj):
+        GroupService().update(key, obj)
+
+    def patch(self, key, field_name, value):
+        GroupService().patch(key, field_name, value)
 
     def delete(self, key):
         GroupService().delete(key)

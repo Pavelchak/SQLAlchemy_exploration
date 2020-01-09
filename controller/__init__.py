@@ -1,1 +1,2 @@
 from impl.group_controller import GroupController
+from impl.student_controller import StudentController

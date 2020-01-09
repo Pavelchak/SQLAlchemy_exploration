@@ -1,25 +1,30 @@
 from dao.i_group_dao import IGroupDAO
-from domain.db_connection import SessionManager
-from domain.group import Group
+from domain import Group, session
 
 
 class GroupDAO(IGroupDAO):
 
     def find_all(self):
-        session = SessionManager.get_session()
         return session.query(Group).all()
 
     def find_by_id(self, key):
-        session = SessionManager.get_session()
-        return session.query(Group).filter_by(id=key).all()
+        return session.query(Group).get(key)
 
     def create(self, obj):
-        session = SessionManager.get_session()
         session.add(obj)
         session.commit()
 
-    def update(self, obj):
-        pass
+    def update(self, key, obj):
+        group = session.query(Group).get(key)
+        group.full_update(obj)
+        session.commit()
+
+    def patch(self, key, field_name, value):
+        group = session.query(Group).get(key)
+        setattr(group, field_name, value)
+        session.commit()
 
     def delete(self, key):
-        pass
+        group = session.query(Group).get(key)
+        session.delete(group)
+        session.commit()

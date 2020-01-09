@@ -17,9 +17,15 @@ class IGeneralService:
         pass
 
     @abstractmethod
-    def update(self, obj):
+    def update(self,key, obj):
+        pass
+
+    @abstractmethod
+    def patch(self, key, field_name, value):
+        # type: (int, str, object) -> None
         pass
 
     @abstractmethod
     def delete(self, key):
+        # type: (int) -> None
         pass

@@ -6,20 +6,30 @@ class IGeneralDAO:
 
     @abstractmethod
     def find_all(self):
+        # type: () -> None
         pass
 
     @abstractmethod
     def find_by_id(self, key):
+        # type: (int) -> None
         pass
 
     @abstractmethod
     def create(self, obj):
+        # type: (object) -> None
         pass
 
     @abstractmethod
-    def update(self, obj):
+    def update(self, key, obj):
+        # type: (int, object) -> None
+        pass
+
+    @abstractmethod
+    def patch(self, key, field_name, value):
+        # type: (int, str, object) -> None
         pass
 
     @abstractmethod
     def delete(self, key):
+        # type: (int) -> None
         pass
